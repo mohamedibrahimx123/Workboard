@@ -1,0 +1,53 @@
+name: CI Pipeline
+
+on:
+  # يتم تشغيل الـ Pipeline تلقائياً عند فتح Pull Request يستهدف فرع main  
+  # أو عند إضافة أي Commit جديدة على الـ Pull Request
+  pull_request:
+    branches:
+      - main
+
+  # يتم تشغيل الـ Pipeline عند الدمج (Merge) الفعلي داخل فرع main
+  push:
+    branches:
+      - main
+# إلغاء أي فحص قديم لنفس الـ PR تلقائياً إذا قام المطور بعمل Push لكود جديد
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, Typecheck, Test & Build
+    runs-on: ubuntu-latest
+
+    env:
+      # متغيرات بيئة افتراضية لتفادي فشل مرحلة الـ build في Next.js & Supabase
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_placeholder_token' }}
+      NEXT_CPU_NUM: 2
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies (clean install)
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: TypeScript Type Check
+        run: npm run typecheck
+
+      - name: Run Vitest Unit Tests
+        run: npm run test
+
+      - name: Build Next.js Application
+        run: npm run build
