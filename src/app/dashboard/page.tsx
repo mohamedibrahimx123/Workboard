@@ -53,15 +53,15 @@ async function DashboardFeedback({
     <div
       role={isError ? "alert" : "status"}
       aria-live="polite"
-      className={`mt-6 flex items-center gap-3 rounded-xl border p-4 text-sm font-medium shadow-sm transition ${
+      className={`mt-6 flex items-center gap-3 rounded-2xl border p-4 text-sm font-medium shadow-sm transition ${
         isError
-          ? "border-red-900/60 bg-red-950/40 text-red-200"
+          ? "border-rose-900/60 bg-rose-950/40 text-rose-200"
           : "border-emerald-900/60 bg-emerald-950/40 text-emerald-200"
       }`}
     >
       {isError ? (
         <svg
-          className="h-5 w-5 shrink-0 text-red-400"
+          className="h-5 w-5 shrink-0 text-rose-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -157,16 +157,28 @@ export default async function DashboardPage({
   const taskList = tasks ?? [];
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-10 text-white">
-      <div className="mx-auto max-w-6xl">
+    <main className="min-h-screen bg-zinc-950 px-6 py-10 text-zinc-100">
+      {/* Background ambient light */}
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(16,185,129,0.08),rgba(255,255,255,0))]" />
+
+      <div className="relative mx-auto max-w-6xl">
         {/* Header */}
-        <header className="flex flex-col justify-between gap-4 border-b border-slate-800 pb-6 sm:flex-row sm:items-center">
+        <header className="flex flex-col justify-between gap-4 border-b border-zinc-800/80 pb-6 sm:flex-row sm:items-center">
           <div>
-            <p className="text-sm font-semibold tracking-widest text-cyan-400">
-              WORKBOARD
+            <div className="flex items-center gap-2">
+              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-500 font-mono text-xs font-black text-zinc-950">
+                W
+              </span>
+              <p className="text-xs font-bold tracking-widest text-emerald-400">
+                WORKBOARD
+              </p>
+            </div>
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-white">
+              Task Dashboard
+            </h1>
+            <p className="mt-1 text-sm text-zinc-400">
+              Welcome back, <span className="font-medium text-zinc-200">{user.email}</span>
             </p>
-            <h1 className="mt-2 text-3xl font-bold">Dashboard</h1>
-            <p className="mt-2 text-slate-400">Welcome back, {user.email}</p>
           </div>
 
           <form action={logout}>
@@ -185,34 +197,62 @@ export default async function DashboardPage({
 
         {/* Task Statistics */}
         <section className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <article className="rounded-xl border border-slate-800 bg-slate-900 p-6">
-            <p className="text-sm text-slate-400">Total Tasks</p>
-            <p className="mt-3 text-3xl font-bold">{totalTasks}</p>
+          <article className="relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-sm backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-zinc-400">Total Tasks</p>
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-800 text-zinc-300">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </span>
+            </div>
+            <p className="mt-4 text-3xl font-extrabold text-white">{totalTasks}</p>
+            <p className="mt-1 text-xs text-zinc-500">Across all projects</p>
           </article>
 
-          <article className="rounded-xl border border-slate-800 bg-slate-900 p-6">
-            <p className="text-sm text-slate-400">In Progress</p>
-            <p className="mt-3 text-3xl font-bold">{inProgressTasks}</p>
+          <article className="relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-sm backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-zinc-400">In Progress</p>
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+            </div>
+            <p className="mt-4 text-3xl font-extrabold text-amber-300">{inProgressTasks}</p>
+            <p className="mt-1 text-xs text-zinc-500">Currently active</p>
           </article>
 
-          <article className="rounded-xl border border-slate-800 bg-slate-900 p-6">
-            <p className="text-sm text-slate-400">Completed</p>
-            <p className="mt-3 text-3xl font-bold">{completedTasks}</p>
+          <article className="relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-sm backdrop-blur-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-zinc-400">Completed</p>
+              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+            </div>
+            <p className="mt-4 text-3xl font-extrabold text-emerald-400">{completedTasks}</p>
+            <p className="mt-1 text-xs text-zinc-500">
+              {totalTasks > 0 ? `${Math.round((completedTasks / totalTasks) * 100)}% completion rate` : "No tasks yet"}
+            </p>
           </article>
         </section>
 
         {/* Create Task Form */}
-        <section className="mt-8 rounded-xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
-          <h2 className="text-xl font-semibold">Create a Task</h2>
-          <p className="mt-2 text-sm text-slate-400">
-            Add a new task to your workspace.
-          </p>
+        <section className="mt-8 rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-sm backdrop-blur-sm sm:p-8">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-white">Create a Task</h2>
+            <p className="mt-1 text-sm text-zinc-400">
+              Add a new actionable item to your workspace.
+            </p>
+          </div>
 
-          <form action={createTask} className="mt-6 space-y-5">
+          <form action={createTask} className="space-y-5">
             <div>
               <label
                 htmlFor="title"
-                className="mb-2 block text-sm font-medium"
+                className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
               >
                 Task title
               </label>
@@ -222,15 +262,15 @@ export default async function DashboardPage({
                 type="text"
                 required
                 maxLength={200}
-                placeholder="e.g. Finish the React project"
-                className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+                placeholder="e.g. Implement authentication middleware"
+                className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder-zinc-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
             </div>
 
             <div>
               <label
                 htmlFor="description"
-                className="mb-2 block text-sm font-medium"
+                className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
               >
                 Description
               </label>
@@ -239,8 +279,8 @@ export default async function DashboardPage({
                 name="description"
                 rows={3}
                 maxLength={5000}
-                placeholder="Add task details..."
-                className="w-full resize-y rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+                placeholder="Add relevant notes, checklist items, or acceptance criteria..."
+                className="w-full resize-y rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder-zinc-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
             </div>
 
@@ -248,7 +288,7 @@ export default async function DashboardPage({
               <div>
                 <label
                   htmlFor="priority"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
                 >
                   Priority
                 </label>
@@ -256,18 +296,18 @@ export default async function DashboardPage({
                   id="priority"
                   name="priority"
                   defaultValue="medium"
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
+                  <option value="low">Low Priority</option>
+                  <option value="medium">Medium Priority</option>
+                  <option value="high">High Priority</option>
                 </select>
               </div>
 
               <div>
                 <label
                   htmlFor="due_date"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
                 >
                   Due date
                 </label>
@@ -276,12 +316,11 @@ export default async function DashboardPage({
                   name="due_date"
                   type="date"
                   min={new Date().toISOString().slice(0, 10)}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
             </div>
 
-            {/* SubmitButton with loading/pending state and duplicate click prevention */}
             <SubmitButton
               label="Create Task"
               pendingLabel="Creating task..."
@@ -291,24 +330,24 @@ export default async function DashboardPage({
         </section>
 
         {/* Task List & Pagination Section */}
-        <section className="mt-8 rounded-xl border border-slate-800 bg-slate-900 p-6 sm:p-8">
+        <section className="mt-8 rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-sm backdrop-blur-sm sm:p-8">
           <div className="mb-6 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
             <div>
-              <h2 className="text-xl font-semibold">My Tasks</h2>
-              <p className="mt-1 text-sm text-slate-400">
-                Manage, update, and organize your tasks.
+              <h2 className="text-xl font-bold text-white">My Tasks</h2>
+              <p className="mt-1 text-sm text-zinc-400">
+                Search, filter, update, and manage your backlog.
               </p>
             </div>
-            <div className="text-xs text-slate-400 sm:text-right">
-              Page <span className="font-semibold text-slate-200">{currentPage}</span> of{" "}
-              <span className="font-semibold text-slate-200">{totalPages}</span>
+            <div className="text-xs text-zinc-400 sm:text-right">
+              Page <span className="font-semibold text-zinc-200">{currentPage}</span> of{" "}
+              <span className="font-semibold text-zinc-200">{totalPages}</span>
             </div>
           </div>
 
           {tasksError ? (
             <div
               role="alert"
-              className="rounded-lg border border-red-900/60 bg-red-950/30 p-4 text-sm text-red-300"
+              className="rounded-xl border border-rose-900/60 bg-rose-950/30 p-4 text-sm text-rose-300"
             >
               تعذّر تحميل المهام حالياً. يرجى المحاولة مرة أخرى لاحقاً.
             </div>
