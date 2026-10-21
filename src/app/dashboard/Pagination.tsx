@@ -74,11 +74,11 @@ export default function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-6 sm:flex-row">
-      <p className="text-sm text-slate-400">
-        Showing <span className="font-semibold text-slate-200">{startIndex}</span> -{" "}
-        <span className="font-semibold text-slate-200">{endIndex}</span> of{" "}
-        <span className="font-semibold text-slate-200">{totalCount}</span> tasks
+    <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-zinc-800/80 pt-6 sm:flex-row">
+      <p className="text-sm text-zinc-400">
+        Showing <span className="font-semibold text-zinc-200">{startIndex}</span> -{" "}
+        <span className="font-semibold text-zinc-200">{endIndex}</span> of{" "}
+        <span className="font-semibold text-zinc-200">{totalCount}</span> tasks
       </p>
 
       <nav aria-label="Pagination" className="flex items-center gap-1.5">
@@ -86,7 +86,7 @@ export default function Pagination({
         {currentPage <= 1 ? (
           <span
             aria-disabled="true"
-            className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-slate-800 px-3 py-2 text-sm text-slate-600"
+            className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-zinc-800/80 px-3 py-2 text-sm text-zinc-600"
           >
             <svg
               className="h-4 w-4"
@@ -106,7 +106,7 @@ export default function Pagination({
         ) : (
           <Link
             href={createPageURL(currentPage - 1)}
-            className="inline-flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white"
+            className="inline-flex items-center gap-1 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-300 transition hover:border-zinc-600 hover:text-white"
           >
             <svg
               className="h-4 w-4"
@@ -146,7 +146,7 @@ export default function Pagination({
               <span
                 key={pageNum}
                 aria-current="page"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500 font-semibold text-slate-950"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500 font-bold text-zinc-950 shadow-sm shadow-emerald-500/30"
               >
                 {pageNum}
               </span>
@@ -154,7 +154,7 @@ export default function Pagination({
               <Link
                 key={pageNum}
                 href={createPageURL(pageNum)}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-sm text-zinc-300 transition hover:border-zinc-600 hover:text-white"
               >
                 {pageNum}
               </Link>
@@ -166,7 +166,7 @@ export default function Pagination({
         {currentPage >= totalPages ? (
           <span
             aria-disabled="true"
-            className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-slate-800 px-3 py-2 text-sm text-slate-600"
+            className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-zinc-800/80 px-3 py-2 text-sm text-zinc-600"
           >
             <span>Next</span>
             <svg
@@ -186,7 +186,7 @@ export default function Pagination({
         ) : (
           <Link
             href={createPageURL(currentPage + 1)}
-            className="inline-flex items-center gap-1 rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-300 transition hover:border-slate-500 hover:text-white"
+            className="inline-flex items-center gap-1 rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-2 text-sm text-zinc-300 transition hover:border-zinc-600 hover:text-white"
           >
             <span>Next</span>
             <svg

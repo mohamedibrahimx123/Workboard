@@ -15,7 +15,7 @@ export default function DeleteButton() {
           event.preventDefault();
         }
       }}
-      className="inline-flex items-center justify-center gap-2 rounded-lg bg-red-600/90 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+      className="inline-flex items-center justify-center gap-2 rounded-lg border border-rose-500/20 bg-rose-500/10 px-4 py-2 text-sm font-medium text-rose-300 transition hover:bg-rose-600 hover:text-white hover:border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {pending ? (
         <>

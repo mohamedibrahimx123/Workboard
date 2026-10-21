@@ -19,13 +19,13 @@ export default function SubmitButton({
 
   const variantStyles = {
     primary:
-      "bg-cyan-500 text-slate-950 hover:bg-cyan-400 focus-visible:ring-cyan-400",
+      "bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 focus-visible:ring-emerald-400 shadow-sm shadow-emerald-950/50",
     secondary:
-      "bg-slate-800 text-white hover:bg-slate-700 focus-visible:ring-slate-600",
+      "bg-zinc-800 text-zinc-100 hover:bg-zinc-700 focus-visible:ring-zinc-600 border border-zinc-700/60",
     danger:
-      "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-400",
+      "bg-rose-600 text-white hover:bg-rose-500 focus-visible:ring-rose-400 shadow-sm shadow-rose-950/50",
     outline:
-      "border border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white focus-visible:ring-slate-500",
+      "border border-zinc-700 bg-zinc-900/60 text-zinc-300 hover:border-zinc-500 hover:text-white focus-visible:ring-zinc-500",
   };
 
   return (

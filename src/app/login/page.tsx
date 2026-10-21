@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { login } from "@/app/auth/actions";
 import SubmitButton from "@/app/dashboard/SubmitButton";
 
@@ -35,10 +36,10 @@ async function LoginErrorMessage({ searchParams }: LoginErrorProps) {
   return (
     <div
       role="alert"
-      className="flex items-center gap-2 rounded-lg border border-red-900 bg-red-950/50 p-3 text-sm text-red-300"
+      className="flex items-center gap-2.5 rounded-xl border border-rose-900/60 bg-rose-950/40 p-3.5 text-sm font-medium text-rose-300"
     >
       <svg
-        className="h-4 w-4 shrink-0 text-red-400"
+        className="h-4 w-4 shrink-0 text-rose-400"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -57,13 +58,27 @@ async function LoginErrorMessage({ searchParams }: LoginErrorProps) {
 
 export default function LoginPage({ searchParams }: LoginPageProps) {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
-      <section className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-        <div className="mb-8">
-          <p className="text-sm font-medium text-cyan-400">WORKBOARD</p>
-          <h1 className="mt-3 text-3xl font-bold">Welcome back</h1>
-          <p className="mt-2 text-sm text-slate-400">
-            Sign in to manage your tasks.
+    <main className="relative flex min-h-screen items-center justify-center bg-zinc-950 px-4 py-12 text-zinc-100">
+      {/* Background ambient radial glow */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08),rgba(0,0,0,0)_60%)]" />
+
+      <section className="relative w-full max-w-md rounded-3xl border border-zinc-800/80 bg-zinc-900/70 p-8 shadow-2xl backdrop-blur-xl sm:p-10">
+        <div className="mb-8 text-center sm:text-left">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-emerald-400 transition hover:text-emerald-300"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-500 font-mono text-xs font-black text-zinc-950">
+              W
+            </span>
+            WORKBOARD
+          </Link>
+
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white">
+            Welcome back
+          </h1>
+          <p className="mt-1 text-sm text-zinc-400">
+            Sign in to manage and accelerate your tasks.
           </p>
         </div>
 
@@ -71,9 +86,9 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
             >
-              Email
+              Email Address
             </label>
             <input
               id="email"
@@ -81,7 +96,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
               type="email"
               autoComplete="email"
               required
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+              className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder-zinc-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               placeholder="you@example.com"
             />
           </div>
@@ -89,7 +104,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
           <div>
             <label
               htmlFor="password"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
             >
               Password
             </label>
@@ -99,7 +114,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
               type="password"
               autoComplete="current-password"
               required
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 outline-none transition focus:border-cyan-400"
+              className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-zinc-100 placeholder-zinc-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               placeholder="Enter your password"
             />
           </div>
@@ -115,6 +130,15 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
             variant="primary"
           />
         </form>
+
+        <div className="mt-8 border-t border-zinc-800/60 pt-6 text-center text-xs text-zinc-500">
+          <Link
+            href="/"
+            className="text-zinc-400 transition hover:text-emerald-400"
+          >
+            ← Back to Homepage
+          </Link>
+        </div>
       </section>
     </main>
   );
